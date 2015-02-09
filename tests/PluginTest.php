@@ -40,7 +40,7 @@ class PluginTest extends \PHPUnit_Framework_TestCase
 
     protected function setUp()
     {
-        $this->plugin = new Plugin();
+        $this->plugin = $this->getPlugin();
         $this->eventMock = $this->getMockEvent();
         $this->queueMock = $this->getMockQueue();
     }
@@ -50,25 +50,48 @@ class PluginTest extends \PHPUnit_Framework_TestCase
      */
     public function testGetSubscribedEvents()
     {
-        $plugin = new Plugin;
+        $plugin = $this->plugin;
         $this->assertInternalType('array', $plugin->getSubscribedEvents());
     }
 
     public function testHandleCommand()
     {
         $source = '#channel';
+        $expectedResponse = $this->plugin->responsePhrase;
+
+        $this->assertInternalType('string', $expectedResponse);
 
         $this->eventMock->shouldReceive('getSource')
             ->andReturn($source)
             ->once();
 
-        $this->eventMock->shouldReceive('getCustomCommand')
-            ->andReturn("ping");
+        $this->queueMock->shouldReceive('ircPrivmsg')
+            ->withArgs(array($source, $expectedResponse))
+            ->once();
 
         $this->plugin->handleCommand($this->eventMock, $this->queueMock);
+    }
+
+    public function testHandleCommandWithCustomPhrase()
+    {
+        $source = '#channel';
+        $customPhrase = 'wut';
+
+        $plugin = $this->getPlugin($customPhrase);
+        $expectedResponse = $plugin->responsePhrase;
+
+        $this->assertInternalType('string', $expectedResponse);
+        $this->assertTrue(false !== strpos($expectedResponse, $customPhrase));
+
+        $this->eventMock->shouldReceive('getSource')
+            ->andReturn($source)
+            ->once();
 
         $this->queueMock->shouldReceive('ircPrivmsg')
-            ->withArgs(array($source, $this->plugin->responsePhrase));
+            ->withArgs(array($source, $expectedResponse))
+            ->once();
+
+        $plugin->handleCommand($this->eventMock, $this->queueMock);
     }
 
     /**
@@ -91,6 +114,25 @@ class PluginTest extends \PHPUnit_Framework_TestCase
             $this->queueMock->shouldReceive('ircPrivmsg')
                 ->withArgs(array($source, $expectedLine));
         }
+    }
+
+    /**
+     * Return an instance of the PingPong plugin
+     *
+     * @param bool|string $customDbPath
+     * @return \Chrismou\Phergie\Plugin\PingPong\Plugin
+     */
+    protected function getPlugin($customResponsePhrase = false)
+    {
+        $config = array();
+        if ($customResponsePhrase) {
+            $config['response'] = $customResponsePhrase;
+        }
+        $plugin = new Plugin($config);
+        $plugin->setEventEmitter(m::mock('\Evenement\EventEmitterInterface'));
+        $plugin->setLogger(m::mock('\Psr\Log\LoggerInterface'));
+
+        return $plugin;
     }
 
     /**
