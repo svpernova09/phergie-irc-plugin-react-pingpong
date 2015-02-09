@@ -38,6 +38,9 @@ class PluginTest extends \PHPUnit_Framework_TestCase
      */
     private $plugin;
 
+    /**
+     * Set up the class pre-test
+     */
     protected function setUp()
     {
         $this->plugin = $this->getPlugin();
@@ -54,6 +57,9 @@ class PluginTest extends \PHPUnit_Framework_TestCase
         $this->assertInternalType('array', $plugin->getSubscribedEvents());
     }
 
+    /**
+     * Tests the main "ping" command
+     */
     public function testHandleCommand()
     {
         $source = '#channel';
@@ -72,6 +78,9 @@ class PluginTest extends \PHPUnit_Framework_TestCase
         $this->plugin->handleCommand($this->eventMock, $this->queueMock);
     }
 
+    /**
+     * Tests the main "ping" command with a custom response phrase set
+     */
     public function testHandleCommandWithCustomPhrase()
     {
         $source = '#channel';

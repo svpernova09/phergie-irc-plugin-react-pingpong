@@ -22,7 +22,7 @@ use Phergie\Irc\Plugin\React\Command\CommandEventInterface as Event;
  */
 class Plugin extends AbstractPlugin
 {
-    /** @var string $response */
+    /** @var string $responsePhrase */
     public $responsePhrase = 'pong';
 
     /**
@@ -53,7 +53,7 @@ class Plugin extends AbstractPlugin
     /**
      * Handle the main "pong" command
      *
-     * @param \Phergie\Irc\Plugin\React\Command\CommandEvent $event
+     * @param \Phergie\Irc\Plugin\React\Command\CommandEventInterface $event
      * @param \Phergie\Irc\Bot\React\EventQueueInterface $queue
      */
     public function handleCommand(Event $event, Queue $queue)
