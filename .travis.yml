@@ -22,7 +22,7 @@ script:
 after_script:
   - bash -c 'if [ "$TRAVIS_PHP_VERSION" != "hhvm" ]; then wget https://scrutinizer-ci.com/ocular.phar; fi;'
   - bash -c 'if [ "$TRAVIS_PHP_VERSION" != "hhvm" ]; then php ocular.phar code-coverage:upload --format=php-clover coverage.clover; fi;'
-  
+
 notifications:
   slack:
     secure: DUC9a45dzD0rmDIc/InzO2A/NvA0KMP2r5P34fKu1iWxwZXbQtcQag2twSJklBauwt5XgeJNAB4JAySh0/DSTTUC6ThqVSU8wkKccTynHcN9807hXMLNEwxT5hSSbSTAMSDBib0yxCac6Ohu6xk0+jGW8ro0e0RP1j7XudXGUPQ=

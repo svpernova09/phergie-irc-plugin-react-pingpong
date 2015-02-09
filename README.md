@@ -2,7 +2,9 @@
 
 [Phergie](http://github.com/phergie/phergie-irc-bot-react/) plugin for testing the bot's responsiveness.
 
-[![Build Status](https://secure.travis-ci.org/chrismou/phergie-irc-plugin-react-pingpong.png?branch=master)](http://travis-ci.org/chrismou/phergie-irc-plugin-react-pingpong)
+[![Build Status](https://scrutinizer-ci.com/g/chrismou/phergie-irc-plugin-react-pingpong/badges/build.png?b=master)](https://scrutinizer-ci.com/g/chrismou/phergie-irc-plugin-react-pingpong/build-status/master)
+[![Code Coverage](https://scrutinizer-ci.com/g/chrismou/phergie-irc-plugin-react-pingpong/badges/coverage.png?b=master)](https://scrutinizer-ci.com/g/chrismou/phergie-irc-plugin-react-pingpong/?branch=master)
+[![Scrutinizer Code Quality](https://scrutinizer-ci.com/g/chrismou/phergie-irc-plugin-react-pingpong/badges/quality-score.png?b=master)](https://scrutinizer-ci.com/g/chrismou/phergie-irc-plugin-react-pingpong/?branch=master)
 
 ## Install
 
