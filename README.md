@@ -8,8 +8,7 @@
 
 ## About
 
-This plugin is designed to simply return a response to the phrase "ping", and is most commonly used to test the bot is still
-responsive.
+This plugin is designed to simply return a response to the phrase "ping", most commonly used to test the bot's responsiveness.
 
 ## Install
 
@@ -34,11 +33,13 @@ To use the default settings, simply add the following to your config file:
 new \Chrismou\Phergie\Plugin\PingPong\Plugin
 ```
 
-Or you can add a custom response phrase:
+Or you can set one of both of the custom config values. "response" is the phrase the bot will reply back with (defaults to "pong), 
+and "reply" sets whether the bot should reply back to the user directly (defaults to false):
 
 ```php
 new \Chrismou\Phergie\Plugin\PingPong\Plugin(array(
-    "response" => "lolwut"
+    "response" => "lolwut",
+    "reply" => false
 ))
 ```
 

@@ -63,7 +63,7 @@ class PluginTest extends \PHPUnit_Framework_TestCase
     public function testHandleCommand()
     {
         $source = '#channel';
-        $expectedResponse = $this->plugin->responsePhrase;
+        $expectedResponse = $this->plugin->getResponse($this->eventMock);
 
         $this->assertInternalType('string', $expectedResponse);
 
@@ -86,11 +86,40 @@ class PluginTest extends \PHPUnit_Framework_TestCase
         $source = '#channel';
         $customPhrase = 'wut';
 
-        $plugin = $this->getPlugin($customPhrase);
-        $expectedResponse = $plugin->responsePhrase;
+        $plugin = $this->getPlugin(array("response" => $customPhrase));
+        $expectedResponse = $plugin->getResponse($this->eventMock);
 
         $this->assertInternalType('string', $expectedResponse);
         $this->assertTrue(false !== strpos($expectedResponse, $customPhrase));
+
+        $this->eventMock->shouldReceive('getSource')
+            ->andReturn($source)
+            ->once();
+
+        $this->queueMock->shouldReceive('ircPrivmsg')
+            ->withArgs(array($source, $expectedResponse))
+            ->once();
+
+        $plugin->handleCommand($this->eventMock, $this->queueMock);
+    }
+
+    /**
+     * Tests the main "ping" command with a custom response phrase set
+     */
+    public function testHandleCommandWithReply()
+    {
+        $source = '#channel';
+        $nick = 'chrismou';
+
+        $plugin = $this->getPlugin(array("reply" => true));
+
+        $this->eventMock->shouldReceive('getNick')
+            ->andReturn($nick)
+            ->twice();
+
+        $expectedResponse = $plugin->getResponse($this->eventMock);
+        $this->assertInternalType('string', $expectedResponse);
+        $this->assertTrue(false !== strpos($expectedResponse, $nick));
 
         $this->eventMock->shouldReceive('getSource')
             ->andReturn($source)
@@ -131,12 +160,8 @@ class PluginTest extends \PHPUnit_Framework_TestCase
      * @param bool|string $customDbPath
      * @return \Chrismou\Phergie\Plugin\PingPong\Plugin
      */
-    protected function getPlugin($customResponsePhrase = false)
+    protected function getPlugin(array $config = array())
     {
-        $config = array();
-        if ($customResponsePhrase) {
-            $config['response'] = $customResponsePhrase;
-        }
         $plugin = new Plugin($config);
         $plugin->setEventEmitter(m::mock('\Evenement\EventEmitterInterface'));
         $plugin->setLogger(m::mock('\Psr\Log\LoggerInterface'));

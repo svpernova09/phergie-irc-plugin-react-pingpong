@@ -23,7 +23,10 @@ use Phergie\Irc\Plugin\React\Command\CommandEventInterface as Event;
 class Plugin extends AbstractPlugin
 {
     /** @var string $responsePhrase */
-    public $responsePhrase = 'pong';
+    protected $responsePhrase = 'pong';
+
+    /** @var bool */
+    protected $reply = false;
 
     /**
      * Accepts plugin configuration.
@@ -33,7 +36,11 @@ class Plugin extends AbstractPlugin
     public function __construct(array $config = array())
     {
         if (isset($config['response'])) {
-            $this->responsePhrase = $config['response'];
+            $this->responsePhrase = (string) $config['response'];
+        }
+
+        if (isset($config['reply'])) {
+            $this->reply = (boolean) $config['reply'];
         }
     }
 
@@ -58,7 +65,7 @@ class Plugin extends AbstractPlugin
      */
     public function handleCommand(Event $event, Queue $queue)
     {
-        $queue->ircPrivmsg($event->getSource(), $this->responsePhrase);
+        $queue->ircPrivmsg($event->getSource(), $this->getResponse($event));
     }
 
     /**
@@ -72,6 +79,17 @@ class Plugin extends AbstractPlugin
         foreach ($this->getHelpLines() as $helpLine) {
             $queue->ircPrivmsg($event->getSource(), $helpLine);
         }
+    }
+
+    public function getResponse($event)
+    {
+        $response = '';
+        if ($this->reply) {
+            $response = sprintf('%s: ', $event->getNick());
+        }
+        $response .= $this->responsePhrase;
+
+        return $response;
     }
 
     /**
