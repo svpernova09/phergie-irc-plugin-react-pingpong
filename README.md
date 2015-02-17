@@ -2,9 +2,9 @@
 
 [Phergie](http://github.com/phergie/phergie-irc-bot-react/) plugin for testing the bot's responsiveness.
 
-[![Build Status](https://scrutinizer-ci.com/g/chrismou/phergie-irc-plugin-react-pingpong/badges/build.png?b=master)](https://scrutinizer-ci.com/g/chrismou/phergie-irc-plugin-react-pingpong/build-status/master)
-[![Code Coverage](https://scrutinizer-ci.com/g/chrismou/phergie-irc-plugin-react-pingpong/badges/coverage.png?b=master)](https://scrutinizer-ci.com/g/chrismou/phergie-irc-plugin-react-pingpong/?branch=master)
-[![Scrutinizer Code Quality](https://scrutinizer-ci.com/g/chrismou/phergie-irc-plugin-react-pingpong/badges/quality-score.png?b=master)](https://scrutinizer-ci.com/g/chrismou/phergie-irc-plugin-react-pingpong/?branch=master)
+[![Build Status](https://img.shields.io/travis/chrismou/phergie-irc-plugin-react-pingpong/master.svg?style=flat-square)](https://travis-ci.org/chrismou/phergie-irc-plugin-react-pingpong)
+[![Coverage Status](https://img.shields.io/scrutinizer/coverage/g/chrismou/phergie-irc-plugin-react-pingpong.svg?style=flat-square)](https://scrutinizer-ci.com/g/chrismou/phergie-irc-plugin-react-pingpong/code-structure)
+[![Quality Score](https://img.shields.io/scrutinizer/g/chrismou/phergie-irc-plugin-react-pingpong.svg?style=flat-square)](https://scrutinizer-ci.com/g/chrismou/phergie-irc-plugin-react-pingpong)
 
 ## About
 
@@ -17,10 +17,13 @@ The recommended method of installation is [through composer](http://getcomposer.
 ```JSON
 {
     "require": {
-        "chrismou/phergie-irc-plugin-react-pingpong": "dev-master"
+        "chrismou/phergie-irc-plugin-react-pingpong": "~1"
     }
 }
 ```
+
+If you want to run bleeding edge (I don't tend to push broken code to master, so you should be safe!) then change 
+`"~1"` to `"~1@dev"`.
 
 See Phergie documentation for more information on
 [installing and enabling plugins](https://github.com/phergie/phergie-irc-bot-react/wiki/Usage#plugins).
