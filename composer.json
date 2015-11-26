@@ -19,7 +19,8 @@
         "source": "https://github.com/chrismou/phergie-irc-plugin-react-pingpong"
     },
     "require": {
-        "phergie/phergie-irc-bot-react": "~1",
+        "php": ">=5.5.0",
+        "phergie/phergie-irc-bot-react": "<3.0",
         "phergie/phergie-irc-plugin-react-command": "~1.0"
 
     },
@@ -45,7 +46,7 @@
     },
     "extra": {
         "branch-alias": {
-            "dev-master": "1.0-dev"
+            "dev-master": "1.1-dev"
         }
     }
 }

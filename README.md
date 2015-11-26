@@ -2,9 +2,9 @@
 
 [Phergie](http://github.com/phergie/phergie-irc-bot-react/) plugin for testing the bot's responsiveness.
 
-[![Build Status](https://img.shields.io/travis/chrismou/phergie-irc-plugin-react-pingpong/master.svg?style=flat-square)](https://travis-ci.org/chrismou/phergie-irc-plugin-react-pingpong)
-[![Coverage Status](https://img.shields.io/scrutinizer/coverage/g/chrismou/phergie-irc-plugin-react-pingpong.svg?style=flat-square)](https://scrutinizer-ci.com/g/chrismou/phergie-irc-plugin-react-pingpong/code-structure)
-[![Quality Score](https://img.shields.io/scrutinizer/g/chrismou/phergie-irc-plugin-react-pingpong.svg?style=flat-square)](https://scrutinizer-ci.com/g/chrismou/phergie-irc-plugin-react-pingpong)
+[![Build Status](https://travis-ci.org/chrismou/phergie-irc-plugin-react-pingpong.svg)](https://travis-ci.org/chrismou/phergie-irc-plugin-react-pingpong)
+[![Test Coverage](https://codeclimate.com/github/chrismou/phergie-irc-plugin-react-pingpong/badges/coverage.svg)](https://codeclimate.com/github/chrismou/phergie-irc-plugin-react-pingpong/coverage)
+[![Code Climate](https://codeclimate.com/github/chrismou/phergie-irc-plugin-react-pingpong/badges/gpa.svg)](https://codeclimate.com/github/chrismou/phergie-irc-plugin-react-pingpong)
 
 ## About
 
@@ -15,15 +15,8 @@ This plugin is designed to simply return a response to the phrase "ping", most c
 The recommended method of installation is [through composer](http://getcomposer.org).
 
 ```JSON
-{
-    "require": {
-        "chrismou/phergie-irc-plugin-react-pingpong": "~1"
-    }
-}
+composer require chrismou/phergie-irc-plugin-react-pingpong
 ```
-
-If you want to run bleeding edge (I don't tend to push broken code to master, so you should be safe!) then change 
-`"~1"` to `"~1@dev"`.
 
 See Phergie documentation for more information on
 [installing and enabling plugins](https://github.com/phergie/phergie-irc-bot-react/wiki/Usage#plugins).
@@ -36,7 +29,7 @@ To use the default settings, simply add the following to your config file:
 new \Chrismou\Phergie\Plugin\PingPong\Plugin
 ```
 
-Or you can set one of both of the custom config values. "response" is the phrase the bot will reply back with (defaults to "pong), 
+Or you can set one of both of the custom config values. "response" is the phrase the bot will reply back with (defaults to "pong"), 
 and "reply" sets whether the bot should reply back to the user directly (defaults to false):
 
 ```php
